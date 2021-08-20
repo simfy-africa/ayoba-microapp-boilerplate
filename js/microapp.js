@@ -1,3 +1,35 @@
+/*
+A stub microapp for ayoba that implements a stub interface and debug logging to the page
+*/
+
+//This function ensures that the console output is visible to the user on the page for debugging purposes
+(function (logger) {
+    console.old = console.log;
+    console.log = function () {
+        var output = "", arg, i;
+
+        for (i = 0; i < arguments.length; i++) {
+            arg = arguments[i];
+            output += "<span class=\"log-" + (typeof arg) + "\">";
+
+            if (
+                typeof arg === "object" &&
+                typeof JSON === "object" &&
+                typeof JSON.stringify === "function"
+            ) {
+                output += JSON.stringify(arg);   
+            } else {
+                output += arg;   
+            }
+
+            output += "</span>&nbsp;";
+        }
+
+        logger.innerHTML += output + "<br>";
+        console.old.apply(undefined, arguments);
+    };
+})(document.getElementById("logger"));
+
 console.log("Starting...");
 var Ayoba = getAyoba();
 import * as AyobaStub from './ayobastub.js';
