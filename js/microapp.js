@@ -11,6 +11,7 @@ window.onload = function afterpagedLoad(){
         console.log("Debug mode: "+debug);
         document.getElementById("log-container").hidden = false;
     }
+    document.getElementById("hostname").innerHTML = window.location.hostname;
 };
 //This function ensures that the console output is visible to the user on the page for debugging purposes
 (function (logger) {
