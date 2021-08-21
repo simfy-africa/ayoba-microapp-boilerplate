@@ -1,6 +1,7 @@
-body {background: #333;}
+#log-container { background:black; overflow: auto; height: 150px; }
+
 .log-boolean,
 .log-undefined {color: magenta;}
 .log-object,
-.log-string {color: orange;}
+.log-string {color: green;}
 .log-number {color: cyan;}
