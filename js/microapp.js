@@ -51,7 +51,21 @@ console.log("List of methods available:");
 Object.getOwnPropertyNames(Ayoba).forEach((value) => {
     console.log(value);
 })
-
+console.log(Object.getOwnPropertyNames(Ayoba));
+//Let's try them all
+console.log("Let's try them..")
+if (Object.getOwnPropertyNames(Ayoba).includes("getSelfJid")) {
+    console.log("JID: "+Ayoba.getSelfJid());
+};
+if (Object.getOwnPropertyNames(Ayoba).includes("getMsisdn")) {
+    console.log("MSISDN: "+Ayoba.getMsisdn());
+};
+if (Object.getOwnPropertyNames(Ayoba).includes("getCountry")) {
+    console.log("Country: "+Ayoba.getCountry());
+};
+if (Object.getOwnPropertyNames(Ayoba).includes("getLanguage")) {
+    console.log("Language: "+Ayoba.getLanguage());
+};
 /**
  * Determine the mobile operating system and returns the 
  * proper javascript interface
