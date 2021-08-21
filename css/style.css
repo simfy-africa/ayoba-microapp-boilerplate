@@ -1,4 +1,11 @@
-#log-container { background:black; overflow: auto; height: 150px; }
+#log-container { 
+    background:black; 
+    overflow-y: scroll;
+    overflow-wrap: break-word;
+    height:25vh;
+    display: flex;
+    flex-direction: column-reverse;
+}
 
 .log-boolean,
 .log-undefined {color: magenta;}
