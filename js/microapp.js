@@ -66,6 +66,10 @@ if (Object.getOwnPropertyNames(Ayoba).includes("getCountry")) {
 if (Object.getOwnPropertyNames(Ayoba).includes("getLanguage")) {
     console.log("Language: "+Ayoba.getLanguage());
 };
+const closeButton = document.getElementById("btn_close");
+closeButton.addEventListener('click', () => {
+    console.log(Ayoba.close());
+});
 /**
  * Determine the mobile operating system and returns the 
  * proper javascript interface

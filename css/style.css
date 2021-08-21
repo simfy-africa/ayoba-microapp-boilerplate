@@ -6,7 +6,6 @@
     display: flex;
     flex-direction: column-reverse;
 }
-
 .log-boolean,
 .log-undefined {color: magenta;}
 .log-object,

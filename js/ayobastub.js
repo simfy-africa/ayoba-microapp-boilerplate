@@ -1,5 +1,5 @@
 export function close(){
-  return "This api call close the ayoba microApp";
+  return "This api call will close the ayoba microApp";
 }
 
 export function sendMessage(){
