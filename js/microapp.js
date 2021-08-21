@@ -1,7 +1,17 @@
 /*
 A stub microapp for ayoba that implements a stub interface and debug logging to the page
 */
-
+var debug = false;
+var context;
+var appcontext
+window.onload = function afterpagedLoad(){
+    context = getURLParameter("context");
+    debug = ("true"===getURLParameter("debug"));
+    if (debug) {
+        console.log("Debug mode: "+debug);
+        document.getElementById("log-container").hidden = false;
+    }
+};
 //This function ensures that the console output is visible to the user on the page for debugging purposes
 (function (logger) {
     console.old = console.log;
@@ -42,11 +52,6 @@ Object.getOwnPropertyNames(Ayoba).forEach((value) => {
     console.log(value);
 })
 
-var debug = getURLParameter("debug");
-var appcontext
-window.onload = function afterpagedLoad(){
-    appcontext = getContext();
-}
 /**
  * Determine the mobile operating system and returns the 
  * proper javascript interface
@@ -149,11 +154,6 @@ function getSelfJidFromUrl() {
     return selfJid
 }
 
-function getContext() {
-    var context = getURLParameter("context")
-    if (debug == "true") document.getElementById("debug").innerHTML += context;
-    return context
-}
 /*
  * The Ayoba native interface calls this method every time
  * the app receives a new location event.
