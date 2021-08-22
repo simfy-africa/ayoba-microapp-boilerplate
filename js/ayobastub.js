@@ -1,102 +1,91 @@
-export function close(){
-  return "This api call will close the ayoba microApp";
-}
+class AyobaStub {
+  constructor() {
+    this.close = this.close();
+    this.getMsisdn = this.getMsisdn;
+    this.getCanSendMessage = this.getCanSendMessage;
+    this.getLanguage = this.getLanguage;
+    this.getSelfJid = this.getSelfJid;
+    this.getContacts = this.getContacts;
+    this.getCountry = this.getCountry;
+    this.sendMessage = this.sendMessage;
+    this.composeMessage = this.composeMessage;
+    this.sendMedia = this.sendMedia;
+    this.sendLocation = this.sendLocation;
+    this.triggerLocationChanged = this.triggerLocationChanged;
+    this.triggerProfileChanged = this.triggerProfileChanged;
+    this.triggerPresenceChanged = this.triggerPresenceChanged;
+    this.triggerMediaSentResponse = this.triggerMediaSentResponse;
+    this.triggerLocationSentResponse = this.triggerLocationSentResponse;
+  }
 
-export function sendMessage(){
-  return "message has been send..!"
-}
+  close() {
+      return "This api call will close the ayoba microApp";
+  }
 
-export function composeMessage(){
-  return "This Api will open the chat"
-}
+  sendMessage() {
+      return "message has been send..!"
+  }
 
-export function sendMedia(){
-  return ("https://i.ytimg.com/vi/d5PP4vIX7P8/maxresdefault.jpg , image/jpg");
-}
+  composeMessage() {
+      return "This Api will open the chat"
+  }
 
-export function sendLocation(){
-  return "Latitude: -26.185357775567436" + " " + "Longitude: 28.019023561909993";
-}
+  sendMedia() {
+      return ("https://i.ytimg.com/vi/d5PP4vIX7P8/maxresdefault.jpg , image/jpg");
+  }
 
-export function getCountry(){
-  var country = "South Africa";
-  return country;
-}
+  sendLocation() {
+      return "Latitude: -26.185357775567436" + " " + "Longitude: 28.019023561909993";
+  }
 
-export function getContacts(){
-  var jsonContacts = "087 324 1313";
-  return jsonContacts
-}
+  getCountry() {
+      var country = "South Africa";
+      return country;
+  }
 
-export function getMsisdn(){
-  var msisdn = "087 324 1313";
-  return msisdn;
-}
+  getContacts() {
+      var jsonContacts = "27833241313";
+      return jsonContacts
+  }
 
-export function getCanSendMessage(){
-  var canSendMessage = "1";
-  return canSendMessage;
-}
+  getMsisdn() {
+      var msisdn = "27833241313";
+      return msisdn;
+  }
 
-export function getLanguage(){
-  var language = "en";
-  return language
-}
+  getCanSendMessage() {
+      var canSendMessage = "1";
+      return canSendMessage;
+  }
 
-export function getSelfJid(){
-  var selfJid = "65c3kdflfc5c7c3hb30lc7615beda57031p2d2df@dev.ayoba.me";
-  return selfJid;
-}
+  getLanguage() {
+      var language = "en";
+      return language
+  }
 
-/*
-* The Ayoba native interface calls this method every time
-* the app receives a new location event.
-* 
-* Remember this listener will only be called when the native
-* permission is accepted by the user. 
-* 
-* In some border cases, also can receive lat=0.0, lon=0.0. Most of
-* cases, will mean Ayoba cannot retrieve the GPS coordinates.
-*/
-export function onLocationChanged(){
-  return "Latitude: -26.185357775567436" + " " + "Longitude: 28.019023561909993";
-}
+  getSelfJid() {
+      var selfJid = "65c3kdflfc5c7c3hb30lc7615beda57031p2d2df@dev.ayoba.me";
+      return selfJid;
+  }
 
-/*
-* The Ayoba native interface calls this method every time
-* the user profile changes (nickname or avatar)
-*/
-export function onProfileChanged(){
-  return
-}
+  triggerLocationChanged() {
+      onLocationChanged(-26.185357775567436, 28.019023561909993);
+  }
 
-/*
-* The Ayoba native interface calls this method every time
-* the user presence changes (infact, always online)
-*/
-export function onPresenceChanged(){
-  return "1";
-}
+  triggerProfileChanged() {
+      onProfileChanged("test name", "https://i.ytimg.com/vi/d5PP4vIX7P8/maxresdefault.jpg");
+  }
 
-/*
-* This method should be implemented to retrieve the "sendMedia(...)" result
-* 
-* @param {int} responseCode: result code
-*  0: the location could not be sent
-*  1: the location has been sent successfully
-* @param encodedUrl: Base64 encoded media file’s url
-*/
-export function onMediaSentResponse(){
-  return "1";
-}
+  triggerPresenceChanged() {
+      onPresenceChanged("test presence");
+  }
 
-/*
-* This method should be implemented to retrieve the "sendLocation(...)" result
-*
-* @param {int} responseCode: result code
-*  0: the location could not be sent
-*  1: the location has been sent successfully
-*/
-export function onLocationSentResponse(){
-  return "1";
+  triggerMediaSentResponse() {
+      onMediaSentResponse(1);
+  }
+
+  triggerLocationSentResponse() {
+      onLocationSentResponse(1);
+  }
+
 }

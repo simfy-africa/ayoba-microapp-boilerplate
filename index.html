@@ -15,7 +15,99 @@
         <pre id="logger"></pre>
     </div>
     <button id="btn_copy">Copy to clipboard</button>
-    <script type="module" src="js/microapp.js"></script>
+
+    <div>
+        <input type="button" value="Get MSISDN" onClick="getMsisdn()" />
+    </div>
+    <div>
+        MSISDN: <span type="text" id="msisdnText"></span>
+    </div>
+
+    <div>
+        <input type="button" value="Get CanSendMessage" onClick="getCanSendMessage()" />
+    </div>
+    <div>
+        Can send  messages: <span type="text" id="cansendText"></span>
+    </div>
+        
+    <div>
+        <input type="button" value="Get Language" onClick="getLanguage()" />
+    </div>
+    <div>
+        Language: <span type="text" id="languageText"></span>
+    </div>
+    <div>
+        <input type="button" value="Get SelfJid" onClick="getSelfJid()" />
+    </div>
+    <div>
+        JID: <span type="text" id="selfjidText"></span>
+    </div>
+    <div>
+        Location: <span type="text" id="locationInputText"></span>
+    </div>
+    <div>
+        Profile:
+        <input type="text" id="nicknameInputText">
+    </div>
+    <div>
+        Presence:
+        <input type="text" id="presenceInputText">
+    </div>
+    
+    <img id="avatarImage" />
+
+    <img id="pictureRetrieved" />
+
+    <div>
+        Message text: <input type="text" id="inputText" />
+    </div>
+    <div>
+        <input type="button" value="Send message" onClick="sendMessage()" />
+    </div>
+    <div>
+        <input type="button" value="Compose message" onClick="composeMessage()" />
+    </div>
+    <div>
+        <input type="button" value="Finish" onClick="finish()" />
+    </div>
+    <div>
+        <input type="button" value="Send media" onClick="sendMedia()" />
+    </div>
+    <div>
+        <input type="text" id="inputTextLat" size="10">
+        <input type="text" id="inputTextLon" size="10">
+        <input type="button" value="Send location" onClick="sendLocation()" />
+    </div>
+    
+    <div>
+        <input type="button" value="Get Country" onClick="getCountry()" />
+    </div>
+   
+    <div>
+        <input type="button" value="Get ContactJid" onClick="getContactJid()" />
+    </div>
+    <div>
+        <input type="button" value="Get ContactName" onClick="getContactName()" />
+    </div>
+
+    <div>
+        <input type="button" value="Get Contacts" onClick="getContacts()" />
+    </div>
+    <div>
+        <input type="button" value="Get Last Text Messages" onClick="getLastTextMessages()" />
+    </div>
+    <div>
+        <input type="button" value="takePicture" onClick="takePicture()" />
+    </div>
+    <div>
+        <input type="button" value="startConversation" onClick="startConversation()" />
+    </div>
+    <div>
+        <input type="button" value="getFile" onClick="getFile()" />
+    </div>
+    
+    <script type="text/javascript" src="js/ayobastub.js"></script>
+    <script type="text/javascript" src="js/microapp.js"></script>
 </body>
 
 </html>

@@ -4,23 +4,23 @@ A stub microapp for ayoba that implements a stub interface and debug logging to 
 var debug = false;
 var context;
 var appcontext
-window.onerror = function(msg, url, line, col, error) {console.log(msg, url, line, col, error);};
+window.onerror = function (msg, url, line, col, error) { console.log(msg, url, line, col, error); };
 console.log("Starting...");
-    var Ayoba = getAyoba();
-    import * as AyobaStub from './ayobastub.js';
-window.onload = function afterpagedLoad(){
+var Ayoba = getAyoba();
+//import * as AyobaStub from './ayobastub.js';
+window.onload = function afterpagedLoad() {
     context = getURLParameter("context");
-    debug = ("true"===getURLParameter("debug"));
+    debug = ("true" === getURLParameter("debug"));
     if (debug) {
-        console.log("Debug mode: "+debug);
+        console.log("Debug mode: " + debug);
         document.getElementById("log-container").hidden = false;
         console.log("Hosted at: " + window.location.href);
     }
     if (Ayoba === null) {
         console.log("Looks like we're not inside ayoba, stubbinng the situation...");
-        Ayoba = AyobaStub;
+        Ayoba = new AyobaStub();
     }
-    else{
+    else {
         console.log("Looks like we're in ayoba...");
     };
     console.log("List of methods available:");
@@ -31,17 +31,18 @@ window.onload = function afterpagedLoad(){
     //Let's try them all
     console.log("Let's try them..")
     if (Object.getOwnPropertyNames(Ayoba).includes("getSelfJid")) {
-        console.log("JID: "+Ayoba.getSelfJid());
+        console.log("Calling getSelfJid()...");
+        console.log("JID: " + Ayoba.getSelfJid());
     };
     if (Object.getOwnPropertyNames(Ayoba).includes("getMsisdn")) {
         console.log("Calling getMsisdn()...");
-        console.log("MSISDN: "+Ayoba.getMsisdn());
+        console.log("MSISDN: " + Ayoba.getMsisdn());
     };
     if (Object.getOwnPropertyNames(Ayoba).includes("getCountry")) {
-        console.log("Country: "+Ayoba.getCountry());
+        console.log("Country: " + Ayoba.getCountry());
     };
     if (Object.getOwnPropertyNames(Ayoba).includes("getLanguage")) {
-        console.log("Language: "+Ayoba.getLanguage());
+        console.log("Language: " + Ayoba.getLanguage());
     };
     const closeButton = document.getElementById("btn_close");
     closeButton.addEventListener('click', () => {
@@ -68,9 +69,9 @@ window.onload = function afterpagedLoad(){
                 typeof JSON === "object" &&
                 typeof JSON.stringify === "function"
             ) {
-                output += JSON.stringify(arg);   
+                output += JSON.stringify(arg);
             } else {
-                output += arg;   
+                output += arg;
             }
 
             output += "</span>&nbsp;";
@@ -95,9 +96,9 @@ function getAyoba() {
 
     if (/android/i.test(userAgent)) {
         try {
-             return Android;
+            return Android;
         } catch (error) {
-           return null; 
+            return null;
         }
     }
 
@@ -114,8 +115,11 @@ function finish() {
 }
 
 function sendMessage() {
-    Ayoba.sendMessage(document.getElementById("summary").innerHTML);
-    Ayoba.finish();
+    Ayoba.sendMessage(document.getElementById("inputText").value);
+}
+
+function composeMessage() {
+    Ayoba.composeMessage(document.getElementById("inputText").value);
 }
 
 function copyMessage(theIndex) {
@@ -129,11 +133,6 @@ function copyMessage(theIndex) {
     document.body.removeChild(el);
 }
 
-function composeMessage() {
-    Ayoba.composeMessage(document.getElementById("inputText").value);
-    Ayoba.finish();
-}
-
 function sendMedia() {
     Ayoba.sendMedia('https://i.ytimg.com/vi/d5PP4vIX7P8/maxresdefault.jpg', 'image/jpg');
 }
@@ -144,25 +143,31 @@ function sendLocation() {
 
 function getCountry() {
     var country = Ayoba.getCountry();
-    document.getElementById("inputText").value = country
+    document.getElementById("countryText").textContent = country
     return country
 }
 
 function getMsisdn() {
     var msisdn = Ayoba.getMsisdn();
-    document.getElementById("inputText").value = msisdn
+    document.getElementById("msisdnText").textContent = msisdn
     return msisdn
+}
+
+function getSelfJid() {
+    var jid = Ayoba.getSelfJid();
+    document.getElementById("selfjidText").textContent = jid
+    return jid
 }
 
 function getCanSendMessage() {
     var canSendMessage = Ayoba.getCanSendMessage();
-    document.getElementById("inputText").value = canSendMessage
+    document.getElementById("cansendText").textContent = canSendMessage
     return canSendMessage
 }
 
 function getLanguage() {
     var language = Ayoba.getLanguage();
-    document.getElementById("inputText").value = language
+    document.getElementById("languageText").textContent = language
     return language
 }
 
@@ -179,7 +184,7 @@ function getURLParameter(sParam) {
 
 function getSelfJidFromUrl() {
     var selfJid = getURLParameter("jid")
-    document.getElementById("inputText").value = selfJid
+    document.getElementById("selfjidText").textContent = selfJid
     return selfJid
 }
 
@@ -194,8 +199,8 @@ function getSelfJidFromUrl() {
  * cases, will mean Ayoba cannot retrieve the GPS coordinates.
  */
 function onLocationChanged(lat, lon) {
-    document.getElementById("locationInputText").value = lat.concat(", ").concat(lon)
-    console.log("Event: location changed, lat: " + lat+", lon: "+lon);
+    document.getElementById("locationInputText").textContent = lat+", "+lon;
+    console.log("Event: location changed, lat: " + lat + ", lon: " + lon);
 }
 
 /*
@@ -205,7 +210,7 @@ function onLocationChanged(lat, lon) {
 function onProfileChanged(nickname, avatarPath) {
     document.getElementById("nicknameInputText").value = nickname
     document.getElementById("avatarImage").src = avatarPath
-    console.log("Event: prfile changed, nickname: " + nickname+", avatar path: "+avatarPath);
+    console.log("Event: prfile changed, nickname: " + nickname + ", avatar path: " + avatarPath);
 }
 
 /*
@@ -244,7 +249,7 @@ function onAvatarChanged(avatar) {
  * @param encodedUrl: Base64 encoded media file’s url
  */
 function onMediaSentResponse(responseCode, encodedUrl) {
-    document.getElementById("inputText").value = responseCode.concat(" - ").concat(encodedUrl)
+    document.getElementById("inputText").value = responseCode+" - "+encodedUrl;
     console.log("Event: media sent, response code: " + responseCode + " URL: " + encodedUrl);
 }
 
