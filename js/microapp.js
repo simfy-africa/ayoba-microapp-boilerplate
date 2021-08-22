@@ -206,7 +206,7 @@ function onLocationChanged(lat, lon) {
 function onProfileChanged(nickname, avatarPath) {
     document.getElementById("nicknameInputText").textContent = nickname
     document.getElementById("avatarImage").src = avatarPath
-    console.log("Event: prfile changed, nickname: " + nickname + ", avatar path: " + avatarPath);
+    console.log("Event: profile changed, nickname: " + nickname + ", avatar path: " + avatarPath);
 }
 
 /*
@@ -214,7 +214,7 @@ function onProfileChanged(nickname, avatarPath) {
  * the user nickname changes (infact, always online)
  */
 function onNicknameChanged(nickname) {
-    document.getElementById("nicknameInputText").value = nickname
+    document.getElementById("nicknameInputText").textContent = nickname
     console.log("Event: nickname changed: " + nickname);
 }
 

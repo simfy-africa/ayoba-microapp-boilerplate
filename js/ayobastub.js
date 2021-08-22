@@ -39,7 +39,7 @@ class AyobaStub {
   }
 
   getCountry() {
-      var country = "South Africa";
+      var country = "ZA";
       return country;
   }
 
