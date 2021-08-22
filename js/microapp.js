@@ -1,7 +1,8 @@
 /*
-A stub microapp for ayoba that implements a stub interface and debug logging to the page
+A boilerplate microapp for ayoba that implements a stub interface and debug logging on the page
 */
 var debug = false;
+var ready = false;
 var context;
 var appcontext
 window.onerror = function (msg, url, line, col, error) { console.log(msg, url, line, col, error); };
@@ -28,26 +29,11 @@ window.onload = function afterpagedLoad() {
         console.log(value);
     })
     console.log(Object.getOwnPropertyNames(Ayoba));
-    //Let's try them all
-    console.log("Let's try them..")
-    if (Object.getOwnPropertyNames(Ayoba).includes("getSelfJid")) {
-        console.log("Calling getSelfJid()...");
-        console.log("JID: " + getSelfJid());
-    };
-    if (Object.getOwnPropertyNames(Ayoba).includes("getMsisdn")) {
-        console.log("Calling getMsisdn()...");
-        console.log("MSISDN: " + getMsisdn());
-    };
-    if (Object.getOwnPropertyNames(Ayoba).includes("getCountry")) {
-        console.log("Country: " + getCountry());
-    };
-    if (Object.getOwnPropertyNames(Ayoba).includes("getLanguage")) {
-        console.log("Language: " + getLanguage());
-    };
     const copyButton = document.getElementById("btn_copy");
     copyButton.addEventListener('click', () => {
         copyMessage("logger");
     });
+    console.log("Now let's wait till the presence is updated...");
 };
 
 //This function ensures that the console output is visible to the user on the page for debugging purposes
@@ -79,8 +65,8 @@ window.onload = function afterpagedLoad() {
 })(document.getElementById("logger"));
 
 /**
- * Determine the mobile operating system and returns the 
- * proper javascript interface
+ * Checks if the microapp is running inside ayoba and on which OS 
+ * returns the OS name or null if not running inside ayoba
  */
 function getAyoba() {
     var userAgent = navigator.userAgent || navigator.vendor || window.opera;
@@ -105,7 +91,32 @@ function getAyoba() {
 
     return "unknown";
 }
+/**
+* This function is called when the microapp is loaded and ready to be used
+*/
+function start(){
+    //Now that presence is updated and Ayoba is initialised, let's try calling a few functions
+    ready = true;
+    console.log("Let's try them..")
+    if (Object.getOwnPropertyNames(Ayoba).includes("getSelfJid")) {
+        console.log("Calling getSelfJid()...");
+        console.log("JID: " + getSelfJid());
+    };
+    if (Object.getOwnPropertyNames(Ayoba).includes("getMsisdn")) {
+        console.log("Calling getMsisdn()...");
+        console.log("MSISDN: " + getMsisdn());
+    };
+    if (Object.getOwnPropertyNames(Ayoba).includes("getCountry")) {
+        console.log("Country: " + getCountry());
+    };
+    if (Object.getOwnPropertyNames(Ayoba).includes("getLanguage")) {
+        console.log("Language: " + getLanguage());
+    };
+}
 
+/**
+* This function is called to close the microapp
+*/
 function finish() {
     console.log(Ayoba.finish());
 }
@@ -216,6 +227,7 @@ function onProfileChanged(nickname, avatarPath) {
 function onNicknameChanged(nickname) {
     document.getElementById("nicknameInputText").textContent = nickname
     console.log("Event: nickname changed: " + nickname);
+    start();
 }
 
 /*
