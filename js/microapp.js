@@ -32,17 +32,17 @@ window.onload = function afterpagedLoad() {
     console.log("Let's try them..")
     if (Object.getOwnPropertyNames(Ayoba).includes("getSelfJid")) {
         console.log("Calling getSelfJid()...");
-        console.log("JID: " + Ayoba.getSelfJid());
+        console.log("JID: " + getSelfJid());
     };
     if (Object.getOwnPropertyNames(Ayoba).includes("getMsisdn")) {
         console.log("Calling getMsisdn()...");
-        console.log("MSISDN: " + Ayoba.getMsisdn());
+        console.log("MSISDN: " + getMsisdn());
     };
     if (Object.getOwnPropertyNames(Ayoba).includes("getCountry")) {
-        console.log("Country: " + Ayoba.getCountry());
+        console.log("Country: " + getCountry());
     };
     if (Object.getOwnPropertyNames(Ayoba).includes("getLanguage")) {
-        console.log("Language: " + Ayoba.getLanguage());
+        console.log("Language: " + getLanguage());
     };
     const copyButton = document.getElementById("btn_copy");
     copyButton.addEventListener('click', () => {
