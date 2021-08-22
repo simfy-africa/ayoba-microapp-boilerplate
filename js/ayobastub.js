@@ -45,7 +45,6 @@ export function getLanguage(){
 
 export function getSelfJid(){
   var selfJid = "65c3kdflfc5c7c3hb30lc7615beda57031p2d2df@dev.ayoba.me";
-
   return selfJid;
 }
 

@@ -244,7 +244,7 @@ function onAvatarChanged(avatar) {
  */
 function onMediaSentResponse(responseCode, encodedUrl) {
     document.getElementById("inputText").value = responseCode.concat(" - ").concat(encodedUrl)
-    console.log("Event onNickNameChanged: " + nickname);
+    console.log("Event: media sent, response code: " + responseCode + " URL: " + encodedUrl);
 }
 
 /*
@@ -256,4 +256,64 @@ function onMediaSentResponse(responseCode, encodedUrl) {
  */
 function onLocationSentResponse(responseCode) {
     document.getElementById("inputText").value = responseCode
+}
+
+function getContactJid() {
+    var contactJid = getURLParameter("contactjid")
+    document.getElementById("inputText").value = contactJid
+    return contactJid
+}
+
+function getContactName() {
+    var contactName = getURLParameter("contactname")
+    document.getElementById("inputText").value = contactName
+    return contactName
+}
+
+function getContacts() {
+    var contactsJson = Ayoba.getContacts();
+    document.getElementById("inputText").value = contactsJson
+    return contactsJson;
+}
+
+function takePicture() {
+    var responseCode = Ayoba.takePicture();
+    return responseCode;
+}
+
+/*
+ * This method should be implemented to retrieve the "sendPicture(...)" result
+ *
+ * @param {int} responseCode: result code
+ *  0: the picture could not be taken
+ *  1: the picture has been taken successfully
+ */
+function onPictureRetrievedResponse(responseCode, picturePath) {
+    document.getElementById("inputText").value = responseCode
+    document.getElementById("pictureRetrieved").src = picturePath
+}
+
+/*
+ * Starts a conversation with a user using his JID
+ */
+function startConversation() {
+    Ayoba.startConversation('07aaf1be5b25b7c8c6a89159bc849e1d37ca7d1c@dev.ayoba.me');
+}
+
+function getFile() {
+    var responseCode = Ayoba.getFile();
+    return responseCode;
+}
+
+/*
+ * This method should be implemented to retrieve the "sendFileRetrievedResponse(...)" result
+ *
+ * @param {int} responseCode: result code
+ *  -1: the file could not be retrieved
+ *  1: the file has retrieved successfully
+ * @param {String} filePath: user selected files paths array
+ */
+function onFileRetrievedResponse(responseCode, filePath) {
+    document.getElementById("inputText").value = responseCode.concat(" - ").concat(filePath)
+    document.getElementById("pictureRetrieved").src = filePath
 }
