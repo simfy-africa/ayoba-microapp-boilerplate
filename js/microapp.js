@@ -46,7 +46,12 @@ window.onload = function afterpagedLoad(){
     closeButton.addEventListener('click', () => {
         console.log(Ayoba.close());
     });
+    const copyButton = document.getElementById("btn_copy");
+    copyButton.addEventListener('click', () => {
+        copyMessage("logger");
+    });
 };
+
 //This function ensures that the console output is visible to the user on the page for debugging purposes
 (function (logger) {
     console.old = console.log;
@@ -74,6 +79,7 @@ window.onload = function afterpagedLoad(){
         console.old.apply(undefined, arguments);
     };
 })(document.getElementById("logger"));
+
 /**
  * Determine the mobile operating system and returns the 
  * proper javascript interface
@@ -112,7 +118,7 @@ function sendMessage() {
 }
 
 function copyMessage(theIndex) {
-    var strInputCode = document.getElementById("result_"+theIndex).innerHTML;
+    var strInputCode = document.getElementById(theIndex).innerHTML;
     var cleanText = strInputCode.replace(/<\/?[^>]+(>|$)/g, "\n");
     const el = document.createElement('textarea');
     el.value = cleanText;
@@ -188,6 +194,7 @@ function getSelfJidFromUrl() {
  */
 function onLocationChanged(lat, lon) {
     document.getElementById("locationInputText").value = lat.concat(", ").concat(lon)
+    console.log("Event: location changed, lat: " + lat+", lon: "+lon);
 }
 
 /*
@@ -197,6 +204,16 @@ function onLocationChanged(lat, lon) {
 function onProfileChanged(nickname, avatarPath) {
     document.getElementById("nicknameInputText").value = nickname
     document.getElementById("avatarImage").src = avatarPath
+    console.log("Event: prfile changed, nickname: " + nickname+", avatar path: "+avatarPath);
+}
+
+/*
+ * The Ayoba native interface calls this method every time
+ * the user nickname changes (infact, always online)
+ */
+function onNickNameChanged(nickname) {
+    document.getElementById("nicknameInputText").value = nickname
+    console.log("Event: nickname changed: " + nickname);
 }
 
 /*
@@ -205,6 +222,16 @@ function onProfileChanged(nickname, avatarPath) {
  */
 function onPresenceChanged(presence) {
     document.getElementById("presenceInputText").value = presence
+    console.log("Event: presence changed: " + presence);
+}
+
+/*
+ * The Ayoba native interface calls this method every time
+ * the user avatar changes (infact, always online)
+ */
+function onAvatarChanged(avatar) {
+    document.getElementById("presenceInputText").value = presence
+    console.log("Event: avate changed: " + avatar);
 }
 
 /*
@@ -217,6 +244,7 @@ function onPresenceChanged(presence) {
  */
 function onMediaSentResponse(responseCode, encodedUrl) {
     document.getElementById("inputText").value = responseCode.concat(" - ").concat(encodedUrl)
+    console.log("Event onNickNameChanged: " + nickname);
 }
 
 /*
