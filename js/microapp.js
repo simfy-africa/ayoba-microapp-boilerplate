@@ -1,14 +1,15 @@
-/*
-A boilerplate microapp for ayoba that implements a stub interface and debug logging on the page
+/**
+* A boilerplate microapp for ayoba that implements a stub interface and debug logging on the page
 */
 var debug = false;
 var ready = false;
 var context;
 var appcontext
+// This is the magic line that pushes error event to the magic console
 window.onerror = function (msg, url, line, col, error) { console.log(msg, url, line, col, error); };
 console.log("Starting...");
 var Ayoba = getAyoba();
-//import * as AyobaStub from './ayobastub.js';
+// Let's wait for the page to load before doing anything
 window.onload = function afterpagedLoad() {
     context = getURLParameter("context");
     debug = ("true" === getURLParameter("debug"));
@@ -37,7 +38,9 @@ window.onload = function afterpagedLoad() {
     console.log("Now let's wait till the presence is updated...");
 };
 
-//This function ensures that the console output is visible to the user on the page for debugging purposes
+/**
+* This function ensures that the console output is visible to the user on the page for debugging purposes
+*/
 (function (logger) {
     console.old = console.log;
     console.log = function () {
@@ -92,6 +95,7 @@ function getAyoba() {
 
     return "unknown";
 }
+
 /**
 * This function is called when the microapp is loaded and ready to be used
 */
