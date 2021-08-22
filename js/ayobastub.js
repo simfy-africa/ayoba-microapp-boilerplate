@@ -16,6 +16,7 @@ class AyobaStub {
     this.triggerPresenceChanged = this.triggerPresenceChanged;
     this.triggerMediaSentResponse = this.triggerMediaSentResponse;
     this.triggerLocationSentResponse = this.triggerLocationSentResponse;
+    this.triggerNicknameChanged = this.triggerNicknameChanged;
   }
 
   finish() {
@@ -86,6 +87,10 @@ class AyobaStub {
 
   triggerLocationSentResponse() {
       onLocationSentResponse(1);
+  }
+
+  triggerNicknameChanged() {
+      onNicknameChanged("test nickname");
   }
 
 }
