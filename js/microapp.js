@@ -97,7 +97,7 @@ function getAyoba() {
 function start(){
     //Now that presence is updated and Ayoba is initialised, let's try calling a few functions
     ready = true;
-    console.log("Let's try them..")
+    console.log("Let's try calling available methods..")
     if (Object.getOwnPropertyNames(Ayoba).includes("getSelfJid")) {
         console.log("Calling getSelfJid()...");
         console.log("JID: " + getSelfJid());
