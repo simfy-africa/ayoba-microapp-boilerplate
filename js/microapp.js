@@ -44,10 +44,6 @@ window.onload = function afterpagedLoad() {
     if (Object.getOwnPropertyNames(Ayoba).includes("getLanguage")) {
         console.log("Language: " + Ayoba.getLanguage());
     };
-    const closeButton = document.getElementById("btn_close");
-    closeButton.addEventListener('click', () => {
-        console.log(Ayoba.close());
-    });
     const copyButton = document.getElementById("btn_copy");
     copyButton.addEventListener('click', () => {
         copyMessage("logger");
@@ -111,7 +107,7 @@ function getAyoba() {
 }
 
 function finish() {
-    Ayoba.finish();
+    console.log(Ayoba.finish());
 }
 
 function sendMessage() {
@@ -208,7 +204,7 @@ function onLocationChanged(lat, lon) {
  * the user profile changes (nickname or avatar)
  */
 function onProfileChanged(nickname, avatarPath) {
-    document.getElementById("nicknameInputText").value = nickname
+    document.getElementById("nicknameInputText").textContent = nickname
     document.getElementById("avatarImage").src = avatarPath
     console.log("Event: prfile changed, nickname: " + nickname + ", avatar path: " + avatarPath);
 }
@@ -217,7 +213,7 @@ function onProfileChanged(nickname, avatarPath) {
  * The Ayoba native interface calls this method every time
  * the user nickname changes (infact, always online)
  */
-function onNickNameChanged(nickname) {
+function onNicknameChanged(nickname) {
     document.getElementById("nicknameInputText").value = nickname
     console.log("Event: nickname changed: " + nickname);
 }
@@ -227,7 +223,7 @@ function onNickNameChanged(nickname) {
  * the user presence changes (infact, always online)
  */
 function onPresenceChanged(presence) {
-    document.getElementById("presenceInputText").value = presence
+    document.getElementById("presenceInputText").textContent = presence
     console.log("Event: presence changed: " + presence);
 }
 
@@ -236,8 +232,8 @@ function onPresenceChanged(presence) {
  * the user avatar changes (infact, always online)
  */
 function onAvatarChanged(avatar) {
-    document.getElementById("presenceInputText").value = presence
-    console.log("Event: avate changed: " + avatar);
+    document.getElementById("avatarImage").src = avatar
+    console.log("Event: avatar changed: " + avatar);
 }
 
 /*

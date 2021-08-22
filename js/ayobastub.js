@@ -1,6 +1,6 @@
 class AyobaStub {
   constructor() {
-    this.close = this.close();
+    this.finish = this.finish;
     this.getMsisdn = this.getMsisdn;
     this.getCanSendMessage = this.getCanSendMessage;
     this.getLanguage = this.getLanguage;
@@ -18,7 +18,7 @@ class AyobaStub {
     this.triggerLocationSentResponse = this.triggerLocationSentResponse;
   }
 
-  close() {
+  finish() {
       return "This api call will close the ayoba microApp";
   }
 
