@@ -34,6 +34,7 @@ window.onload = function afterpagedLoad(){
         console.log("JID: "+Ayoba.getSelfJid());
     };
     if (Object.getOwnPropertyNames(Ayoba).includes("getMsisdn")) {
+        console.log("Calling getMsisdn()...");
         console.log("MSISDN: "+Ayoba.getMsisdn());
     };
     if (Object.getOwnPropertyNames(Ayoba).includes("getCountry")) {
