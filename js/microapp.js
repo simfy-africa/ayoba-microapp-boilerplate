@@ -4,6 +4,9 @@ A stub microapp for ayoba that implements a stub interface and debug logging to 
 var debug = false;
 var context;
 var appcontext
+console.log("Starting...");
+    var Ayoba = getAyoba();
+    import * as AyobaStub from './ayobastub.js';
 window.onload = function afterpagedLoad(){
     context = getURLParameter("context");
     debug = ("true"===getURLParameter("debug"));
@@ -12,6 +15,36 @@ window.onload = function afterpagedLoad(){
         document.getElementById("log-container").hidden = false;
         console.log("Hosted at: " + window.location.href);
     }
+    if (Ayoba === null) {
+        console.log("Looks like we're not inside ayoba, stubbinng the situation...");
+        Ayoba = AyobaStub;
+    }
+    else{
+        console.log("Looks like we're in ayoba...");
+    };
+    console.log("List of methods available:");
+    Object.getOwnPropertyNames(Ayoba).forEach((value) => {
+        console.log(value);
+    })
+    console.log(Object.getOwnPropertyNames(Ayoba));
+    //Let's try them all
+    console.log("Let's try them..")
+    if (Object.getOwnPropertyNames(Ayoba).includes("getSelfJid")) {
+        console.log("JID: "+Ayoba.getSelfJid());
+    };
+    if (Object.getOwnPropertyNames(Ayoba).includes("getMsisdn")) {
+        console.log("MSISDN: "+Ayoba.getMsisdn());
+    };
+    if (Object.getOwnPropertyNames(Ayoba).includes("getCountry")) {
+        console.log("Country: "+Ayoba.getCountry());
+    };
+    if (Object.getOwnPropertyNames(Ayoba).includes("getLanguage")) {
+        console.log("Language: "+Ayoba.getLanguage());
+    };
+    const closeButton = document.getElementById("btn_close");
+    closeButton.addEventListener('click', () => {
+        console.log(Ayoba.close());
+    });
 };
 //This function ensures that the console output is visible to the user on the page for debugging purposes
 (function (logger) {
@@ -40,37 +73,6 @@ window.onload = function afterpagedLoad(){
         console.old.apply(undefined, arguments);
     };
 })(document.getElementById("logger"));
-
-console.log("Starting...");
-var Ayoba = getAyoba();
-import * as AyobaStub from './ayobastub.js';
-if (Ayoba === null) {
-    console.log("Looks like we're not inside ayoba, stubbinng the situation...");
-    Ayoba = AyobaStub;
-};
-console.log("List of methods available:");
-Object.getOwnPropertyNames(Ayoba).forEach((value) => {
-    console.log(value);
-})
-console.log(Object.getOwnPropertyNames(Ayoba));
-//Let's try them all
-console.log("Let's try them..")
-if (Object.getOwnPropertyNames(Ayoba).includes("getSelfJid")) {
-    console.log("JID: "+Ayoba.getSelfJid());
-};
-if (Object.getOwnPropertyNames(Ayoba).includes("getMsisdn")) {
-    console.log("MSISDN: "+Ayoba.getMsisdn());
-};
-if (Object.getOwnPropertyNames(Ayoba).includes("getCountry")) {
-    console.log("Country: "+Ayoba.getCountry());
-};
-if (Object.getOwnPropertyNames(Ayoba).includes("getLanguage")) {
-    console.log("Language: "+Ayoba.getLanguage());
-};
-const closeButton = document.getElementById("btn_close");
-closeButton.addEventListener('click', () => {
-    console.log(Ayoba.close());
-});
 /**
  * Determine the mobile operating system and returns the 
  * proper javascript interface
