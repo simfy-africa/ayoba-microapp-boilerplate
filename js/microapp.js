@@ -4,6 +4,7 @@ A stub microapp for ayoba that implements a stub interface and debug logging to 
 var debug = false;
 var context;
 var appcontext
+window.onerror = function(msg, url, line, col, error) {console.log(msg, url, line, col, error);};
 console.log("Starting...");
     var Ayoba = getAyoba();
     import * as AyobaStub from './ayobastub.js';
