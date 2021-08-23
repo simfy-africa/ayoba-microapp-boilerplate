@@ -232,7 +232,8 @@ function onProfileChanged(nickname, avatarPath) {
 function onNicknameChanged(nickname) {
     document.getElementById("nicknameInputText").textContent = nickname
     console.log("Event: nickname changed: " + nickname);
-    start();
+    //Only call start the 1st time the app is loaded
+    if (!ready){ start();};
 }
 
 /*
