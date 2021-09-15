@@ -99,7 +99,7 @@ function getAyoba() {
 /**
 * This function is called when the microapp is loaded and ready to be used
 */
-function start(){
+function start() {
     //Now that presence is updated and Ayoba is initialised, let's try calling a few functions
     ready = true;
     console.log("Let's try calling available methods..")
@@ -166,7 +166,7 @@ function getMsisdn() {
 }
 
 function getSelfJid() {
-    var jid = Ayoba.getSelfJid();
+    var jid = getSelfJidFromUrl();
     document.getElementById("selfjidText").textContent = jid
     return jid
 }
@@ -211,7 +211,7 @@ function getSelfJidFromUrl() {
  * cases, will mean Ayoba cannot retrieve the GPS coordinates.
  */
 function onLocationChanged(lat, lon) {
-    document.getElementById("locationInputText").textContent = lat+", "+lon;
+    document.getElementById("locationInputText").textContent = lat + ", " + lon;
     console.log("Event: location changed, lat: " + lat + ", lon: " + lon);
 }
 
@@ -233,7 +233,7 @@ function onNicknameChanged(nickname) {
     document.getElementById("nicknameInputText").textContent = nickname
     console.log("Event: nickname changed: " + nickname);
     //Only call start the 1st time the app is loaded
-    if (!ready){ start();};
+    if (!ready) { start(); };
 }
 
 /*
@@ -263,7 +263,7 @@ function onAvatarChanged(avatar) {
  * @param encodedUrl: Base64 encoded media file’s url
  */
 function onMediaSentResponse(responseCode, encodedUrl) {
-    document.getElementById("inputText").value = responseCode+" - "+encodedUrl;
+    document.getElementById("inputText").value = responseCode + " - " + encodedUrl;
     console.log("Event: media sent, response code: " + responseCode + " URL: " + encodedUrl);
 }
 
